@@ -1,0 +1,14 @@
+//bootrap code generale
+$primary:orange;
+// Abstracts
+@import "./abstracts/variables";
+@import "./abstracts/reusables_classes";
+
+// Themes
+@import "./themes/base_visitor";
+
+//base
+@import "./base/typography";
+
+@import "~bootstrap/scss/bootstrap";
+
