@@ -14,4 +14,12 @@ class WelcomeController extends AbstractController
 
         return $this->render('pages/visitor/welcome/index.html.twig');
     }
+
+    #[Route('/test', name: 'app_test_visitor_index', methods: ['GET'])]
+    public function indextest(): Response
+    {
+
+        return $this->render('pages/visitor/stage/index.html.twig');
+    }
 }
+
