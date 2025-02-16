@@ -21,5 +21,12 @@ class WelcomeController extends AbstractController
 
         return $this->render('pages/visitor/stage/index.html.twig');
     }
+    
+    /*
+    public function indextest(): Response
+    {
+
+        return $this->render('pages/visitor/stage/index.html.twig');
+    }*/
 }
 
