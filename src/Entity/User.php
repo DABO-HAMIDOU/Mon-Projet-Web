@@ -85,6 +85,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotCompromisedPassword(message: "ce mot de passe est facilement piratable!veillez en choisir un autre plus complexe.")]
     #[ORM\Column]
     private ?string $password = null;
+    
+    #[ORM\Column]
+    private bool $isVerified = false;
 
     #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(nullable: true)]
@@ -98,10 +101,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?\DateTimeImmutable $updatedAt = null;
 
     
-
-    #[ORM\Column]
-    private bool $isVerified = false;
-
 //ajout details utils ici
 //1-je  vais creer un role user pour eviter le vide dans la base de donnée.
 
