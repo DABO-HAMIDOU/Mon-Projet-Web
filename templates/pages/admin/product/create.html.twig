@@ -1,0 +1,119 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Listes des Produits {% endblock %} 
+
+{% block description %} Listes des Produits {% endblock %}  
+
+{% block jQuery %} 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+{% endblock %}
+
+{% block select2 %} 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#product_form_categories').select2();
+            });
+    </script>
+   
+{% endblock %}
+
+{% block main %} 
+    <h1 class="text-center display-5 my-3">Ajouter un Produit</h1>
+
+    <div class="container  my-5">
+        <div class="row">
+            <div class="col-md-6 col-lg-6 mx-auto">
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                            <label for="product_form_name">Nom<span class="text-danger">*</span></label>
+                            <div class="text-danger">{{{{ form_errors(form.name) }}}}</div>
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+
+                     <div class="mb-3">
+                        <label for="product_form_code">Code  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.code) }}}}</div>
+                        {{ form_widget(form.code, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_form_brand">Marque</label>
+                        <div class="text-danger">{{{{ form_errors(form.brand) }}}}</div>
+                        {{ form_widget(form.brand, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_form_sellingPrice">Prix de vente <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.sellingPrice) }}}}</div>
+                        <div class="input-group">
+                            {{ form_widget(form.sellingPrice, {'attr': {'class': 'form-control'}} )}}
+                            <span class="input-group-text">€</span>
+                        </div>   
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_form_quantity">Quantité en stock  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.quantity) }}}}</div>
+                            {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+                     <div class="mb-3">
+                        <label for="product_form_categories" id="">Les Categories  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.categories) }}}}</div>
+                        {{ form_widget(form.Categories, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+
+                    <div class="row mb-3 ">
+                        <div class="col-md-6">
+                            <div class="text-danger">{{{{ form_errors(form.isNewArrival) }}}}</div>
+                            {{ form_widget(form.isNewArrival) }}
+                            <label for="product_form_isNewArrival">Nouvelle 'arrivage</label>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_widget(form.isBetterSeller) }}
+                            <label for="product_form_isBetterSeller">Meilleure vente</label>
+                            <div class="text-danger">{{{{ form_errors(form.isBetterSeller) }}}}</div>
+                        </div>
+                         <div class="col-md-4">
+                             <label for="product_form_isAvaible">Disponible</label>
+                             <div class="text-danger">{{{{ form_errors(form.isAvaible) }}}}</div>
+                            {{ form_widget(form.isAvaible, {'attr': {'class': 'form-control'}}) }}     
+                        </div>
+                    </div>
+
+                    {# <div class="mb-3">
+                        <label for="product_form_imageFile">Image du Produit  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.imageFile) }}}}</div>
+                        {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}} )}}
+                    </div> #}
+
+                     <div class="mb-3">
+                        <label for="product_form_shortDescription">Courte Description  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.isBetterSeller) }}}}</div>
+                        {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}} )}}
+                    </div>
+
+                     <div class="mb-3">
+                        <label for="product_form_longDescription">Longue Description  <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{{{ form_errors(form.longDescription) }}}}</div>
+                        {{ form_widget(form.longDescription, {'attr': {'class': 'form-control', 'rows':6}} )}}
+                    </div>
+
+                    
+
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-primary w-50" value="Créer">
+                    </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    
+    </div>
+
+
+
+{% endblock %} 

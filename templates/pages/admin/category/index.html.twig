@@ -1,0 +1,79 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %} Listes des Categories {% endblock %} 
+
+{% block description %} Listes des Categories {% endblock %} 
+
+{% block jQuery %} 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+{% endblock %} 
+
+    {% block datatables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.2.2/datatables.min.css" rel="stylesheet" integrity="sha384-M6C9anzq7GcT0g1mv0hVorHndQDVZLVBkRVdRb2SsQT7evLamoeztr1ce+tvn+f2" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.2.2/datatables.min.js" integrity="sha384-k90VzuFAoyBG5No1d5yn30abqlaxr9+LfAPp6pjrd7U3T77blpvmsS8GqS70xcnH" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.2/i18n/fr-FR.json'
+                }
+            });
+        });
+    </script>
+
+
+     {% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Liste des catégories</h1>
+    {% include 'components/_alert.html.twig' %}
+
+    <div class="d-flex justify-content-end align-items-center my-3">
+        <a href="{{path('admin_category_create')}}" class="btn btn-primary">Nouvelle catégorie</a>
+    </div>
+
+    <!-- Utilisation de col-md-8 et offset-md-2 pour réduire l'espace -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2"> <!-- Réduit l'offset pour moins de décalage -->
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-striped table-hover table-bordered text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>Créé le</th>
+                                <th>Ajouté le</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                                <tr>
+                                    <td>{{category.id}}</td>
+                                    <td>{{category.name}}</td>
+                                    <td>{{category.description}}</td>
+                                    <td>{{category.createdAt|format_date()}}</td>
+                                    <td>{{category.updatedAt|format_date()}}</td>
+                                     <td>
+                                        <a href="{{ path('admin_category_edit', {'id': category.id}) }}" class="btn btn-sm btn-secondary">Modifier</a>
+                                        
+                                        <form class="d-inline" method="POST" action="{{path('admin_category_delete', {'id':category.id})}}"> 
+                                        
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_category_'~category.id)}}">
+                                            <input type="submit" class="btn btn-sm btn-danger" value="Supprimer" onclick="return confirm('Confirmer la suppression?')" >
+                                        </form>
+                                    </td> 
+                                </tr> 
+                            {% endfor %} 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
