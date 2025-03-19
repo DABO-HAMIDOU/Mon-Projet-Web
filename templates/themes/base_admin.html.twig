@@ -203,7 +203,7 @@
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link text-dark" href="#">
-                                <span data-feather="bar-chart-2"><i class="fa-solid fa-user-plus"></i></span>
+                                <span data-feather="bar-chart-2"><i class="fa-solid fa-user-minus"></i></span>
                                 Utilisateurs
                                 </a>
                             </li>
@@ -232,14 +232,20 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#">
+                                <a class="nav-link text-dark" href="{{path('user_home_index')}}">
+                                <span data-feather="file-text"><i class="fa-solid fa-user-plus"></i></span>
+                                Espace Utilisateur
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark" href="{{path('user_home_index')}}">
                                 <span data-feather="file-text"><i class="fa-solid fa-arrow-rotate-left"></i></span>
                                 retour au site
                                 </a>
                             </li>
                        
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="app_logout">
+                                <a class="nav-link text-dark" href="{{path('app_logout')}}">
                                 <span data-feather="file-text"><i class="fa-solid fa-right-from-bracket"></i></span>
                                 Déconnexion
                                 </a>
