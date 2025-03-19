@@ -1,1 +1,11 @@
 {% extends "themes/base_user.html.twig" %}
+
+{% block title %} Espace Client {% endblock %}
+
+{% block description %} Espace Client {% endblock %}
+
+{% block main %} 
+<h1 class="text-center text-secondary my-3 display-5">Mon espace client </h1>
+<h5 class="text-center mt-3">Bonjour Mr-{{app.user.firstName}}</h5>
+
+{% endblock %}
