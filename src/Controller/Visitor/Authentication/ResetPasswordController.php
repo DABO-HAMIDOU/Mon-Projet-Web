@@ -2,7 +2,6 @@
 namespace App\Controller\Visitor\Authentication;
 
 
-
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
@@ -35,19 +34,19 @@ class ResetPasswordController extends AbstractController
     /**
      * Display & process form to request a password reset.
      */
-    #[Route('', name: 'Visitor_Authentication_forgot_password_request')]
+    #[Route('', name: 'visitor_authentication_forgot_password_request')]
     public function request(Request $request, MailerInterface $mailer, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
         $form->handleRequest($request);
-          
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            /** @var string $email */
-            $email = $form->get('email')->getData();
 
-            return $this->processSendingPasswordResetEmail($email, $mailer, $translator
-);
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            return $this->processSendingPasswordResetEmail(
+                $form->get('email')->getData(),
+                $mailer,
+                $translator
+            );
         }
 
         return $this->render('pages/visitor/authentication/reset_password/request.html.twig', [
@@ -58,7 +57,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Confirmation page after a user has requested a password reset.
      */
-    #[Route('/check-email', name: 'visotor_authentication_forgot_check_email')]
+    #[Route('/check-email', name: 'visitor_authentication_forgot_check_email')]
     public function checkEmail(): Response
     {
         // Generate a fake token if the user does not exist or someone hit this page directly.
@@ -78,7 +77,8 @@ class ResetPasswordController extends AbstractController
     #[Route('/reset/{token}', name: 'visitor_authentication_reset_password')]
     public function reset(Request $request, UserPasswordHasherInterface $passwordHasher, TranslatorInterface $translator, ?string $token = null): Response
     {
-        if ($token) {
+        if ($token) 
+        {
             // We store the token in session and remove it from the URL, to avoid the URL being
             // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
             $this->storeTokenInSession($token);
@@ -87,12 +87,14 @@ class ResetPasswordController extends AbstractController
         }
 
         $token = $this->getTokenFromSession();
-        if (null === $token) {
+
+        if (null === $token) 
+        {
             throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
         }
 
-        try {
-            /** @var User $user */
+        try 
+        {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
@@ -101,22 +103,24 @@ class ResetPasswordController extends AbstractController
                 $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             ));
 
-            return $this->redirectToRoute('Visitor_Authentication_forgot_password_request');
+            return $this->redirectToRoute('visitor_authentication_forgot_password_request');
         }
 
         // The token is valid; allow the user to change their password.
-        $form = $this->createForm(ChangePasswordFormType::class, $user);
+        $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // A password reset token should be used only once, remove it.
             $this->resetPasswordHelper->removeResetRequest($token);
 
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
-
             // Encode(hash) the plain password, and set it.
-            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            $encodedPassword = $passwordHasher->hashPassword(
+                $user,
+                $form->get('plainPassword')->getData()
+            );
+
+            $user->setPassword($encodedPassword);
             $this->entityManager->flush();
 
             // The session is cleaned up after the password has been changed.
@@ -138,7 +142,7 @@ class ResetPasswordController extends AbstractController
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
-            return $this->redirectToRoute('visotor_authentication_forgot_check_email');
+            return $this->redirectToRoute('visitor_authentication_forgot_check_email');
         }
 
         try {
@@ -154,13 +158,13 @@ class ResetPasswordController extends AbstractController
             //     $translator->trans($e->getReason(), [], 'ResetPasswordBundle')
             // ));
 
-            return $this->redirectToRoute('visotor_authentication_forgot_check_email');
+            return $this->redirectToRoute('visitor_authentication_forgot_check_email');
         }
 
         $email = (new TemplatedEmail())
-            ->from(new Address('syllatechno@gmail.com', 'syllaTechno'))
-            ->to((string) $user->getEmail())
-            ->subject('Réinitialisation de votre compte sur le site syllatechno')
+            ->from(new Address('electrotech@gmail.com', 'ElectroTech'))
+            ->to($user->getEmail())
+            ->subject("Réinitialisation de votre compte sur le site electroTech")
             ->htmlTemplate('emails/email_for_reset_password.html.twig')
             ->context([
                 'resetToken' => $resetToken,
@@ -172,6 +176,6 @@ class ResetPasswordController extends AbstractController
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
-        return $this->redirectToRoute('visotor_authentication_forgot_check_email');
+        return $this->redirectToRoute('visitor_authentication_forgot_check_email');
     }
 }
