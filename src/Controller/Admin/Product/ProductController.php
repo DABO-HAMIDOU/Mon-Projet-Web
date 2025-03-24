@@ -30,8 +30,7 @@ class ProductController extends AbstractController{
         {
            
         }
-
-
+        
         return $this->render(
             'pages/admin/product/create.html.twig',[
                 "form" => $form->createView(),
