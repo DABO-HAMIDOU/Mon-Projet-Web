@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
     // ✅ Correction de la signature du constructeur
     public function __construct(private EntityManagerInterface $em, private CategoryRepository $categoryRepository) {}
 
-    #[Route('/category/list', name: 'admin_category_index', methods: ['GET'])]
+    #[Route('/category/list', name: 'admin_category_index', methods: ['GET','POST'])]
     public function index(): Response
     {
         return $this->render('pages/admin/category/index.html.twig', [
@@ -52,14 +52,11 @@ class CategoryController extends AbstractController
     public function edit(Category $category, Request $request): Response
     {
         // ✅ Déplacer la création du formulaire au début
-        $form = $this->createForm(CategoryFormType::class, $category, [
-            "method"=>"PUT"
-        ]);
+        $form = $this->createForm(CategoryFormType::class, $category,['method'=>"PUT"]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setUpdatedAt(new DateTimeImmutable());
-            $this->em->persist($category);
             $this->em->flush(); // ✅ Correction ici : pas besoin de transmettre un paramètre à flush()
 
             $this->addFlash("success", "La catégorie a été modifiée avec succès !");
@@ -71,6 +68,7 @@ class CategoryController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
 
     #[Route('/category/{id<\d+>}/delete', name: 'admin_category_delete', methods: ['DELETE'])]
     public function delete(Category $category, Request $request): Response

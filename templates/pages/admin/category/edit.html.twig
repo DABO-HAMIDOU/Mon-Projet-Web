@@ -9,7 +9,7 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-8 col-lg-6 mx-auto">
-                {{ form_start(form) }}
+                {{ form_start(form)}}
                     <div class="mb-3">
                         <label for="category_form_name">Nom <span class="text-danger">*</span></label>
                         <div class="text-danger">{{ form_errors(form.name) }}</div>
@@ -25,8 +25,6 @@
                     <div class="mb-3">
                         <input formnovalidate type="submit" class="btn btn-primary" value="Modifier">
                     </div>
-
-
                 {{ form_end(form) }}
             </div>
         </div>

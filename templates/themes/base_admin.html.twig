@@ -30,10 +30,17 @@
 
  {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+{% endblock %}
+
 {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+{% endblock %}
+
+
+{% block jQuery %} {% endblock %}
+
+{% block dataTables %} {% endblock %}
+
 
 
 <style>
@@ -184,7 +191,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href="#">
+                                <a class="nav-link active text-dark" href="{{path(('admin_category_index'))}}">
                                 <span data-feather="file"><i class="fa-solid fa-layer-group"></i></span>
                                 Catégories 
                                 </a>
