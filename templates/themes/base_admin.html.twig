@@ -36,8 +36,9 @@
         {{ encore_entry_script_tags('app') }}
 {% endblock %}
 
-
 {% block jQuery %} {% endblock %}
+
+{% block select2 %}{% endblock %}
 
 {% block dataTables %} {% endblock %}
 
@@ -197,7 +198,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#">
+                                <a class="nav-link text-dark" href="{{path('admin_product_index')}}">
                                 <span data-feather="shopping-cart"><i class="fa-brands fa-product-hunt"></i></span>
                                 Produits
                                 </a>

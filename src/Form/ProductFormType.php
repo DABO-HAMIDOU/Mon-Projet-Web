@@ -23,7 +23,6 @@ class ProductFormType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('code', TextType::class)
-            ->add('slug', TextType::class)
             ->add('shortDescription', TextareaType::class)
             ->add('longDescription', TextareaType::class)
             ->add('brand', TextType::class)
@@ -32,21 +31,29 @@ class ProductFormType extends AbstractType
             ->add('isNewArrival', CheckboxType::class)
             ->add('isBetterSeller', CheckboxType::class)
             ->add('isAvaible',  ChoiceType::class, [
-            'choices'  => [
-                'oui' => true,
-                'Non' => false,    
+                'choices'  => [
+                    'oui' => true,
+                    'Non' => false,
                 ],
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => "Disponibilité produit "
-                ]) 
-            ->add('Categories', EntityType::class, [
+            ])
+            ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
-            // ->add('imageFile', VichImageType::class)
-        ;
+            ->add('imageFile', VichImageType::class,[
+            'required' => false,
+            'allow_delete' => true,
+            'delete_label' => 'supprimer',
+            'download_label' => false,
+            'download_uri' => false,
+            'image_uri' => false,
+            'imagine_pattern' => false,
+            'asset_helper' => true,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
