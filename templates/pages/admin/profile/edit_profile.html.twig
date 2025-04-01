@@ -1,0 +1,61 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block description %}Modifier mon profil{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block dataTables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/fr-FR.json',
+                }
+            });
+        } );
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modifier mon profil</h1>
+
+
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-8 col-lg-4 mx-auto">
+
+                    {{form_start(form)}}
+
+                        <div class="mb-3">
+                            <label for="edit_profile_form_firstName">Prénom</label>
+                            <div class="text-danger">{{form_errors(form.firstName)}}</div>
+                            {{form_widget(form.firstName, {'attr': {'class':'form-control', 'autofocus':'autofocus'}})}}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="edit_profile_form_lastName">Nom</label>
+                            <div class="text-danger">{{form_errors(form.lastName)}}</div>
+                            {{form_widget(form.lastName, {'attr': {'class':'form-control'}})}}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="edit_profile_form_email">Email</label>
+                            <div class="text-danger">{{form_errors(form.email)}}</div>
+                            {{form_widget(form.email, {'attr': {'class':'form-control'}})}}
+                        </div> 
+
+                        <div class="my-3">
+                            <input formnovalidate type="submit" class="btn btn-primary w-100" value="Modifier profil">
+                        </div>
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+{% endblock %}

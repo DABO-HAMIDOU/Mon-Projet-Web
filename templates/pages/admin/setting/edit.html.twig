@@ -1,0 +1,112 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Modification des paramètres du site{% endblock %}
+
+{% block description %}Modification des paramètres du site{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block dataTables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.2/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/fr-FR.json',
+                }
+            });
+        } );
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modification des paramètres du site</h1>
+
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-10 col-lg-6 mx-auto shadow">
+                {% include 'components/_alert.html.twig' %}
+                {{form_start(form)}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Nom : </label>
+                                <div class="text-danger">{{form_errors(form.webSiteName)}}</div>
+                                {{form_widget(form.webSiteName, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Url : </label>
+                                <div class="text-danger">{{form_errors(form.websiteUrl)}}</div>
+                                {{form_widget(form.websiteUrl, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Description : </label>
+                                <div class="text-danger">{{form_errors(form.description)}}</div>
+                                {{form_widget(form.description, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Email : </label>
+                                <div class="text-danger">{{form_errors(form.email)}}</div>
+                                {{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Numéro de téléphone : </label>
+                                <div class="text-danger">{{form_errors(form.phone)}}</div>
+                                {{form_widget(form.phone, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>La rue : </label>
+                                <div class="text-danger">{{form_errors(form.street)}}</div>
+                                {{form_widget(form.street, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>La ville : </label>
+                                <div class="text-danger">{{form_errors(form.city)}}</div>
+                                {{form_widget(form.city, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le code postal : </label>
+                                <div class="text-danger">{{form_errors(form.postalCode)}}</div>
+                                {{form_widget(form.postalCode, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le pays : </label>
+                                <div class="text-danger">{{form_errors(form.state)}}</div>
+                                {{form_widget(form.state, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le lien facebook du site : </label>
+                                <div class="text-danger">{{form_errors(form.facebookLink)}}</div>
+                                {{form_widget(form.facebookLink, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le lien instagram du site : </label>
+                                <div class="text-danger">{{form_errors(form.instagramLink)}}</div>
+                                {{form_widget(form.instagramLink, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le lien tiktok du site : </label>
+                                <div class="text-danger">{{form_errors(form.tiktokLink)}}</div>
+                                {{form_widget(form.tiktokLink, {'attr': {'class': 'form-control'}})}}
+                            </div>
+                        </div>
+                    </div>
+                    
+    
+                     <p>
+                        <a class="btn btn-primary w-100" href="{{ path('admin_setting_index') }}">Modifier les paramètres</a>
+                    </p>
+
+                    
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
