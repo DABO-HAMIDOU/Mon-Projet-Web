@@ -52,6 +52,11 @@
                 <li class="nav-item">
                     <a class="nav-link active text-white" href="">Contact</a>
                 </li> 
+                <li class="my-3 my-lg-0 mx-lg-3">
+                    
+                    {{ render(controller('App\\Controller\\Visitor\\Search\\SearchController::getSearchBar')) }}
+
+                </li> 
                 <li class="nav-item">
                     <a class="nav-link text-white" href=""><i class="fas fa-shopping-cart"></i> Mon panier(e)</a>
                 </li>

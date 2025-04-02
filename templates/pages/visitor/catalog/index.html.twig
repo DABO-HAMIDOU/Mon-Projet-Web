@@ -14,7 +14,7 @@
             <div class="col-md-2">
                 {# Filtre #}
             </div>
-                <div class="col-md-10">
+            <div class="col-md-10">
                 {% for row in products|batch(3) %}
                     <div class="row">
                         {% for product in row %}
@@ -29,9 +29,9 @@
                                         </a>
                                         <p class="card-subtitle mb-2 text-muted">Marque: {{ product.brand }}</p>
                                         <p class="card-subtitle mb-2 text-muted">Prix: {{ product.sellingPrice }} euros.</p>
-                                        <p class="card-text">
-                                            <a href="#" class="btn btn-sm btn-primary">Ajouter au panier</a>
-                                            <a href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }}" class="btn btn-sm btn-secondary">
+                                        <p class="card-text d-flex justify-content-between gap-2">
+                                            <a href="#" class="btn btn-sm btn-primary text-nowrap px-1">Ajouter au panier</a>
+                                            <a href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }} text-nowrap px-1 " class="btn btn-sm btn-secondary">
                                                 Voir les détails
                                             </a>
                                         </p>
@@ -41,7 +41,7 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-        </div>
+            </div>
     </div>
 </div>
 {% endblock %}

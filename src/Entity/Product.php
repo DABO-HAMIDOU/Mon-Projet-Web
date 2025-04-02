@@ -38,7 +38,7 @@ class Product
     //     message: "Cette categorie n'est pas valide.",
     // )]
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
-    private Collection $Categories;
+    private Collection $categories;
 
     #[Assert\NotBlank(message: "Le code est obligatoire!")]
     #[Assert\Length(
@@ -140,7 +140,7 @@ class Product
 
     public function __construct()
     {
-        $this->Categories = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -346,13 +346,13 @@ class Product
      */
     public function getCategories(): Collection
     {
-        return $this->Categories;
+        return $this->categories;
     }
 
     public function addCategory(Category $category): static
     {
-        if (!$this->Categories->contains($category)) {
-            $this->Categories->add($category);
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
         }
 
         return $this;
@@ -360,7 +360,7 @@ class Product
 
     public function removeCategory(Category $category): static
     {
-        $this->Categories->removeElement($category);
+        $this->categories->removeElement($category);
 
         return $this;
     }
