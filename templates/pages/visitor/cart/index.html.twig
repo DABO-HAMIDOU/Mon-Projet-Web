@@ -1,13 +1,62 @@
-{% extends "themes/base_visitor.html.twig" %}
+{% extends 'themes/base_visitor.html.twig' %}
 
-{% block title %}Panier {% endblock %}
+{% block title %}Cart{% endblock %}
 
-{% block description %}Catlogue des produits: Curseur de riz, Machine à laver...{% endblock %}
+{% block description %}Cart{% endblock %}
 
-{% block keywords %}SyllaTechno, Panier{% endblock %}
+{% block keywords %}ElectroTech, Cart, Produits{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">A propos de mon panier </h1>
+    <h1 class="text-center my-3 display-5">Panier</h1>
 
-  
+    <div class="table-responsive">
+        <table class="table table-striped table-hover text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Retirer du panier</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cartItem in cartItems %}
+                    <tr>
+                        <th>
+                            <img src="{{vich_uploader_asset(cartItem.product, 'imageFile') | imagine_filter('admin_product_thumb') }}" alt="{{cartItem.product.name}}">
+                        </th>
+                        <th>{{cartItem.product.name}}</th>
+                        <th>{{cartItem.product.sellingPrice}}</th>
+                        <th>
+                            <a href="{{path('visitor_cart_decrement', {'id': cartItem.product.id})}}" class="btn btn-sm btn-secondary">
+                                <i class="fa-solid fa-minus"></i>
+                            </a>
+                            <span class="mx-1">{{cartItem.quantity}}</span>
+                            <a href="{{path('visitor_cart_add', {'id': cartItem.product.id})}}" class="btn btn-sm btn-secondary">
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
+                        </th>
+                        <th>{{cartItem.getAmount}} euros</th>
+                        <th>
+                            <a href="{{path('visitor_cart_remove', {'id': cartItem.product.id})}}" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-x"></i>
+                            </a>
+                        </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4">Total</th>
+                    <th>{{cartTotalAmount}} euros</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="my-3">
+        <a href="#" class="btn btn-primary shadow">Passer ma commande</a>
+    </div>
 {% endblock %}

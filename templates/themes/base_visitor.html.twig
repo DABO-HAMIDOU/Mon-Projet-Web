@@ -47,7 +47,7 @@
                     <a class="nav-link active text-white" href="{{ path('visitor_catalog_index') }}">Produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active text-white" href="{{ path('visitor_about_us_index') }}">À propos</a>
+                    <a class="nav-link active text-white" href="{{ path('visitor_about_us_index') }}">À&nbsp;propos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active text-white" href="">Contact</a>
@@ -57,9 +57,12 @@
                     {{ render(controller('App\\Controller\\Visitor\\Search\\SearchController::getSearchBar')) }}
 
                 </li> 
-                <li class="nav-item">
-                    <a class="nav-link text-white" href=""><i class="fas fa-shopping-cart"></i> Mon panier(e)</a>
-                </li>
+               <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('visitor_cart_index') }}">
+                        {{ cart_service.getCartItems()|length }} 
+                        <i class="fas fa-shopping-cart"></i> Mon panier
+                    </a>
+            </li>
             </ul>
 
             {% if app.user %} 

@@ -29,12 +29,22 @@
                                         </a>
                                         <p class="card-subtitle mb-2 text-muted">Marque: {{ product.brand }}</p>
                                         <p class="card-subtitle mb-2 text-muted">Prix: {{ product.sellingPrice }} euros.</p>
-                                        <p class="card-text d-flex justify-content-between gap-2">
-                                            <a href="#" class="btn btn-sm btn-primary text-nowrap px-1">Ajouter au panier</a>
-                                            <a href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }} text-nowrap px-1 " class="btn btn-sm btn-secondary">
-                                                Voir les détails
+                                        
+                                        <div class="card-text d-flex justify-content-between gap-2">
+                                            <!-- Formulaire pour ajouter au panier -->
+                                            <form action="{{ path('visitor_cart_add', {'id': product.id}) }}" method="get" style="display: inline;">
+                                                <button type="submit" class="btn btn-sm btn-primary text-nowrap px-1 ms-0">
+                                                    Ajouter au panier
+                                                </button>
+                                            </form>
+
+                                            <!-- Lien pour voir les détails -->
+                                            <a href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }}" class="btn btn-sm btn-secondary text-nowrap px-1  ms-0">
+                                                Voir détails
                                             </a>
-                                        </p>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>

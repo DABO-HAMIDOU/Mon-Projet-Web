@@ -43,7 +43,7 @@
                         <p><strong>Longue description</strong>: {{product.longDescription}}</p>
                     </div>
                 {% endif %}
-                <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                <a href="{{path('visitor_cart_add', {'id':product.id})}}" class="btn btn-primary">Ajouter au panier</a>
 
             </div>
         </div>
