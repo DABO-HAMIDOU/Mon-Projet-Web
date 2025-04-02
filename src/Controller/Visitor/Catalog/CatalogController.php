@@ -16,10 +16,10 @@ class CatalogController extends AbstractController
     }
 
     #[Route('/', name: 'visitor_catalog_index', methods:['GET'])]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
         return $this->render('pages/visitor/catalog/index.html.twig', [
-            "products" => $this->productRepository->findBy(["isAvailable" => true])
+            "products" => $this->productRepository->findBy(["isAvaible" => true])
         ]);
     }
     

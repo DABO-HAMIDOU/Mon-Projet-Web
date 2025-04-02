@@ -1,0 +1,51 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}{{product.name}}{% endblock %}
+
+{% block description %}{{product.name}}{% endblock %}
+
+{% block keywords %}Sylla-techno, Produits{% endblock %}
+
+{% block main %}
+
+    <div class="container my-5">
+        <div class="row">
+            <nav aria-label="breadcrumb my-5">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{path('visitor_catalog_index')}}">Liste des produits</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
+                </ol>
+            </nav>
+            <div class="col-md-2 text-center mt-5">
+                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="img-fluid" alt="{{product.name}}">
+            </div>
+            <div class="col-md-10">
+                <h1 class="text-center my-3">{{product.name}}</h1>
+                <p><strong>Marque</strong>: {{product.brand}}</p>
+                <p>
+                    {% for category in product.categories %}
+                        {{category.name}} 
+                    {% endfor %}
+                </p>
+                <p><strong>Prix</strong>: {{product.sellingPrice}} euros.</p>
+                <p>
+                    {% if product.quantity > 0 %}
+                        <span class="badge text-bg-success">Produit disponible</span>
+                    {% else %}
+                        <span class="badge text-bg-danger">Stock épuisé</span>
+                    {% endif %}
+                </p>
+                <div>
+                    <p><strong>Courte description</strong>: {{product.shortDescription}}</p>
+                </div>
+                {% if product.longDescription %}
+                    <div>
+                        <p><strong>Longue description</strong>: {{product.longDescription}}</p>
+                    </div>
+                {% endif %}
+                <a href="#" class="btn btn-primary">Ajouter au panier</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

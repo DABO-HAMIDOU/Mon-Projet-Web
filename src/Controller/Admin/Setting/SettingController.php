@@ -39,15 +39,16 @@ final class SettingController extends AbstractController
      public function edit(Setting $setting, Request $request): Response
     
      {
-        $form = $this->createForm(SettingFormType::class, $setting);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
+         $form = $this->createForm(SettingFormType::class, $setting);
+         $form->handleRequest($request);
+         
+         if ($form->isSubmitted() && $form->isValid()) {
+             
             $setting->setUpdatedAt(new DateTimeImmutable());
-
+            
             $this->em->persist($setting);
             $this->em->flush();
+
 
             $this->addFlash("success", "Les paramètres du site ont été modifiés.");
 
