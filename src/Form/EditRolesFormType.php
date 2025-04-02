@@ -21,7 +21,6 @@ class EditRolesFormType extends AbstractType
                 "expanded" => false,
                 "multiple" => true
             ]);
-        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

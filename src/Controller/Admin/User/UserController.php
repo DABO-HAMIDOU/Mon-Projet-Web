@@ -15,17 +15,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class UserController extends AbstractController
 {
 
-    public function __construct(private EntityManagerInterface $em) 
-    {
+    public function __construct(private EntityManagerInterface $em)
+     {
 
     }
-    #[Route('/user/list', name: 'admin_user_index', methods:['GET'])]
+
+    #[Route('/user/list', name: 'admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('pages/admin/user/index.html.twig', [
-    "users" => $userRepository->findAll()
+            "users" => $userRepository->findAll()
         ]);
     }
+
 
     #[Route('/user/{id<\d+>}/edit-roles', name: 'admin_user_edit_roles', methods: ['GET', 'PUT'])]
     public function editRoles(User $user, Request $request): Response
@@ -33,24 +35,28 @@ final class UserController extends AbstractController
         $form = $this->createForm(EditRolesFormType::class, $user, [
             "method" => "PUT"
         ]);
-
-    dump($user);
     
         $form->handleRequest($request);
+    
+        
+        if ($form->isSubmitted()) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    
+            // dd($request->request->all());
+
+            
             $this->em->persist($user);
-            $this->em->flush();
           
-            $this->addFlash("success", "Les rôles de {$user->getFirstName()} 
-            {$user->getLastName()} ont été modifiés.");
-         
+            $this->em->flush();
+            dd("pause");
+            $this->addFlash("success", "Les rôles de {$user->getFirstName()} {$user->getLastName()} ont été modifiés.");
+
             return $this->redirectToRoute('admin_user_index');
-       }
-     
+        }
+    
         return $this->render('pages/admin/user/edit_roles.html.twig', [
             "form" => $form->createView()
-            
         ]);
     }
+    
 }

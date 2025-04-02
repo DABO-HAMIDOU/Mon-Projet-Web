@@ -1,13 +1,47 @@
-{% extends "themes/base_visitor.html.twig" %}
+{% extends 'themes/base_visitor.html.twig' %}
 
-{% block title %}Catalogue des produits{% endblock %}
+{% block title %}Catalog  produits{% endblock %}
 
-{% block description %}Catlogue des produits: Curseur de riz, Machine à laver...{% endblock %}
+{% block description %}Catalogue prodduits{% endblock %}
 
-{% block keywords %}SyllaTechno, Catalogue Produits Informatiques, Souris, Imprimantes{% endblock %}
+{% block keywords %}Sylla-Techno, Catalog, Produits{% endblock %}
 
 {% block main %}
     <h1 class="text-center my-3 display-5">Liste des produits</h1>
 
-  
+<div class="container">
+    <div class="row">
+            <div class="col-md-2">
+                {# Filtre #}
+            </div>
+            <div class="col-md-10">
+                {% for row in products|batch(3) %}
+                    <div class="row">
+                        {% for product in row %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <a class="text-center" href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }}">
+                                        <img src="{{ vich_uploader_asset(product, 'imageFile') }}" class="w-100 h-100" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="card-body">
+                                        <a class="text-center text-decoration-none text-dark" href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }}">
+                                            <p class="card-title">{{ product.name }}</p>
+                                        </a>
+                                        <p class="card-subtitle mb-2 text-muted">Marque: {{ product.brand }}</p>
+                                        <p class="card-subtitle mb-2 text-muted">Prix: {{ product.sellingPrice }} euros.</p>
+                                        <p class="card-text d-flex justify-content-between gap-2">
+                                            <a href="#" class="btn btn-sm btn-primary text-nowrap px-1">Ajouter au panier</a>
+                                            <a href="{{ path('visitor_catalog_product_show', { 'id': product.id, 'slug': product.slug }) }} text-nowrap px-1 " class="btn btn-sm btn-secondary">
+                                                Voir les détails
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+</div>
 {% endblock %}
