@@ -42,13 +42,10 @@ final class UserController extends AbstractController
         if ($form->isSubmitted()) {
 
     
-            // dd($request->request->all());
-
-            
             $this->em->persist($user);
           
             $this->em->flush();
-            dd("pause");
+           
             $this->addFlash("success", "Les rôles de {$user->getFirstName()} {$user->getLastName()} ont été modifiés.");
 
             return $this->redirectToRoute('admin_user_index');
