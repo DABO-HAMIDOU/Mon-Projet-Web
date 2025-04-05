@@ -1,0 +1,40 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Commande{% endblock %}
+
+{% block description %}Commande{% endblock %}
+
+{% block keywords %}Sylla-Techno, Commande, Produits{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Ma commande</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                {# Formulaire : adresse et livreur #}
+                {{form_start(form)}}
+                    <div class="mb-3">
+                        <div class="text-danger">{{form_errors(form.address)}}</div>
+                        {{form_widget(form.address, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <div class="text-danger">{{form_errors(form.carrier)}}</div>
+                        {{form_widget(form.carrier, {'attr':{'class':'form-control'}})}}
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-primary w-100" value="Passer la commande et payer">
+                    </div>
+                {{form_end(form)}}
+            </div>
+            <div class="col-md-6">
+                Recap 
+                {% for cartItem in cartItems %}
+                    <div>
+                        <p>{{cartItem.quantity}}x {{cartItem.product.name}} </p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

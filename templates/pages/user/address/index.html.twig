@@ -1,0 +1,42 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Mes adresses{% endblock %}
+
+{% block description %}Liste de mes adresses{% endblock %}
+
+{% block keywords %}adresse, utilisateur{% endblock %}
+
+{% block main %}
+    <h1 class="text-center display-5">Mes adresses</h1>
+
+     {% include 'components/_alert.html.twig' %}
+
+    <div class="d-flex justify-content-end align-items-center my-3">
+        <a href="{{path('user_address_create')}}" class="btn btn-primary shadow">Ajouter adresse</a>
+    </div>
+
+    <div class="container-fluid my-3">
+        <div class="row">
+            {% for address in app.user.addresses %}
+                <div class="card" style="width:18rem;">
+                    <div class="card-body">
+                        <h2 class="card-title">{{address.keyword ? address.keyword : "Adresse" }}</h2>
+                        <p class="card-subtitle mb-2 text-muted ">{{address.street}}</p>
+                        <p class="card-text">{{address.firstName}} {{address.lastName}}</p>
+                        <p class="card-text">Code Postal: {{address.postalCode}}</p>
+                        <p class="card-text">Téléphone: {{address.phone}}</p>
+                        <p class="card-text">Ville: {{address.city}}, Pays: {{address.country}}</p>
+                        <div>
+                            <a href="{{path('user_address_edit', {'id': address.id})}}" class="btn btn-sm btn-dark">Modifier</a>
+                            <form class="d-inline" method="POST" action="{{path('user_address_delete', {'id': address.id})}}">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_address_'~address.id)}}">
+                                <input onclick="return confirm('Confirmer la suppression de cette adresse?')" type="submit" class="btn btn-sm btn-danger" value="Supprimer" >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div> 
+{% endblock %}

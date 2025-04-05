@@ -1,0 +1,83 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Nouvelle adresse{% endblock %}
+
+{% block description %}Nouvelle adresse{% endblock %}
+
+{% block keywords %}nouvelle, adresse, utilisateur{% endblock %}
+
+{% block main %}
+    <h1 class="text-center display-5">Nouvelle adresse</h1>
+    
+    <div class="container">
+        {{form_start(form)}}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label>La rue <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.street)}}</div>
+                        {{form_widget(form.street, {"attr": {"class": "form-control", "autofocus": "autofocus"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Le code postal <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.postalCode)}}</div>
+                        {{form_widget(form.postalCode, {"attr": {"class": "form-control", "placeholder": "Entre 3 et 10 chiffres"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>La ville <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.city)}}</div>
+                        {{form_widget(form.city, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Le pays <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.country)}}</div>
+                        {{form_widget(form.country, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Quel mot clé souhaitez-vous associer à votre adresse?</label>
+                        <div class="text-danger">{{form_errors(form.keyword)}}</div>
+                        {{form_widget(form.keyword, {"attr": {"class": "form-control"}})}}
+                        <small><em>Seul les chiffres, les lettres, les espaces, le tiret et l'undescore sont acceptés.</em></small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label>Le prénom <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.firstName)}}</div>
+                        {{form_widget(form.firstName, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Le nom <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.lastName)}}</div>
+                        {{form_widget(form.lastName, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>L'email</label>
+                        <div class="text-danger">{{form_errors(form.email)}}</div>
+                        {{form_widget(form.email, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Le numéro de téléphone <span class="text-danger">*</span></label>
+                        <div class="text-danger">{{form_errors(form.phone)}}</div>
+                        {{form_widget(form.phone, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>L'entreprise</label>
+                        <div class="text-danger">{{form_errors(form.company)}}</div>
+                        {{form_widget(form.company, {"attr": {"class": "form-control"}})}}
+                    </div>
+                    <div class="mb-3">
+                        <label>Des informations complémentaires </label>
+                        <div class="text-danger">{{form_errors(form.details)}}</div>
+                        {{form_widget(form.details, {"attr": {"class": "form-control", "placeholder": "Bâtiment, Etage..."}})}}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <input formnovalidate type="submit" class="btn btn-primary shadow w-100">
+            </div>
+        {{form_end(form)}}
+    </div>
+
+{% endblock %}

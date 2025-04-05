@@ -45,6 +45,7 @@ security:
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/order, roles: ROLE_USER }
+        - { path: ^/payment, roles: ROLE_USER }
 
 
 when@test:
