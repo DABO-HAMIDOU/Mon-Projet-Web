@@ -1,0 +1,74 @@
+{% extends 'themes/base_user.html.twig' %}
+
+{% block title %}Modifier cette commande{% endblock %}
+
+{% block description %}Modifier cette commande{% endblock %}
+
+{% block keywords %}ElectroTech, Modifier cette commande, Produits{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Modifier cette commande</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {# Formulaire : adresse et livreur #}
+                {{form_start(form)}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>La rue <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryStreet)}}</div>
+                                {{form_widget(form.deliveryStreet, {"attr": {"class": "form-control", "autofocus": "autofocus"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le code postal <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryPostalCode)}}</div>
+                                {{form_widget(form.deliveryPostalCode, {"attr": {"class": "form-control", "placeholder": "Entre 3 et 10 chiffres"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>La ville <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryCity)}}</div>
+                                {{form_widget(form.deliveryCity, {"attr": {"class": "form-control"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le pays <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryCountry)}}</div>
+                                {{form_widget(form.deliveryCountry, {"attr": {"class": "form-control"}})}}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label>Le prénom <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryFirstName)}}</div>
+                                {{form_widget(form.deliveryFirstName, {"attr": {"class": "form-control"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le nom <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryLastName)}}</div>
+                                {{form_widget(form.deliveryLastName, {"attr": {"class": "form-control"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>L'email</label>
+                                <div class="text-danger">{{form_errors(form.deliveryEmail)}}</div>
+                                {{form_widget(form.deliveryEmail, {"attr": {"class": "form-control"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <label>Le numéro de téléphone <span class="text-danger">*</span></label>
+                                <div class="text-danger">{{form_errors(form.deliveryPhone)}}</div>
+                                {{form_widget(form.deliveryPhone, {"attr": {"class": "form-control"}})}}
+                            </div>
+                            <div class="mb-3">
+                                <div class="text-danger">{{form_errors(form.carrierName)}}</div>
+                                {{form_widget(form.carrierName, {'attr':{'class':'form-control'}})}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-primary w-100" value="Modifier la commande">
+                    </div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
