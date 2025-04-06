@@ -26,65 +26,53 @@
     <h1 class="text-center my-3 display-5">Liste des Utilisateurs</h1>
     {% include 'components/_alert.html.twig' %}
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="table-responsive">
-                    <table id="myTable" class="table table-striped table-hover table-bordered text-center">
-                        <thead class="table-dark">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12"> <!-- Utilise col-12 pour occuper toute la largeur sur tous les écrans -->
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped table-hover table-bordered text-center w-100">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Prenom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Verifier</th>
+                            <th>Créer le</th>
+                            <th>Modifier le</th>
+                            <th class="text-center">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
                             <tr>
-                                <th>Id</th>
-                                <th>Prenom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                                <th>Rôles</th>
-                                <th>Verifier</th>
-                                <th>Créer le</th>
-                                <th>Modifier le</th>
-
-                                <th class="text-center">Options</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in users %}
-                                <tr>
-                                    <td>{{ user.id }}</td>
-                                    <td>{{ user.firstname }}</td>
-                                    <td>{{ user.lastname }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.firstName }}</td> <!-- Correction de la variable `firstname` à `firstName` -->
+                                <td>{{ user.lastName }}</td>  <!-- Correction de la variable `lastname` à `lastName` -->
+                                <td>{{ user.email }}</td>
+                                <td>
                                     {% for role in user.roles %}
-                                     
-                                     <span class="badge text-bg-secondary">{{role}}</span>
+                                        <span class="badge text-bg-secondary">{{ role }}</span>
                                     {% endfor %}
-                                     <td>{{ user.isVerified ? user.isVerified: "pas encore"}}</td>
-                                    </td>
-                                    <td>{{ user.createdAt|format_date() }}</td>
-                                    <td>{{ user.updatedAt|format_date() }}</td>
-                                    <td>
-                                    {% if "ROLE_SUPER_ADMIN" not in user.Roles %}
-
+                                </td>
+                                <td>{{ user.isVerified ? "Vérifié" : "Pas encore" }}</td> <!-- Affichage plus clair -->
+                                <td>{{ user.createdAt|format_date() }}</td>
+                                <td>{{ user.updatedAt|format_date() }}</td>
+                                <td>
+                                    {% if "ROLE_SUPER_ADMIN" not in user.roles %}
                                         <a href="{{ path('admin_user_edit_roles', {'id': user.id}) }}" class="btn btn-sm btn-secondary">Modifier les rôles</a>
-                                        {# <button class="btn btn-sm btn-danger delete-btn"
-                                                data-id="{{ user.id }}"
-                                                data-name="{{ user.name }}"
-                                                data-url="{{ path('admin_user_delete', {'id': user.id}) }}"
-                                                data-csrf="{{ csrf_token('delete_user_' ~ user.id) }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#confirmDeleteModal">
-                                            Supprimer
-                                        </button> #}
-                                    
-                                    {% endif %}          
-                                    </td> 
-                                </tr> 
-                            {% endfor %} 
-                        </tbody>
-                    </table>
-                </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+
 
     <!-- Modal de confirmation -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
