@@ -17,6 +17,7 @@ class Order
     public const STATUS_PENDING = "en cours";
     public const STATUS_PAYMENT_PROBLEM = "commande effectuée mais paiement refusé";
     public const STATUS_PAYMENT_SUCCESSFULLY = "commande effectuée et paiement réussi";
+    public const STATUS_PAID = "commande effectuée et paiement réussi";
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
