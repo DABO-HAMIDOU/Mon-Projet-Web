@@ -7,5 +7,60 @@
 {% block keywords %}ElectroTech, Paiement{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Page de paiement</h1>
+    <div class="container my-5">
+        <h1 class="text-center my-3 display-5">Paiement de votre commande</h1>
+
+        <div class="alert alert-info text-center" role="alert">
+            Veuillez vérifier les informations de votre commande avant de procéder au paiement.
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Adresse de livraison</h5>
+                        <p class="card-text">
+                            {{ order.deliveryFirstName }} {{ order.deliveryLastName }}<br>
+                            {{ order.deliveryStreet }}<br>
+                            {{ order.deliveryPostalCode }} {{ order.deliveryCity }}<br>
+                            {{ order.deliveryCountry }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Mode de livraison</h5>
+                        <p class="card-text">
+                            {{ order.carrierName }}<br>
+                            Prix: {{ order.totalAmount | number_format(2, '.', ',') }} €
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Résumé de la commande</h5>
+                        <ul class="list-group list-group-flush">
+                            {% for item in order.orderItems %}
+                            <li class="list-group-item">
+                                {{ item.productName }} x{{ item.getProductQuantity() }} - {{ item.productPrice | number_format(2, '.', ',') }} €
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <hr>
+                        <p class="text-end mt-3"><strong>Total : </strong>{{ order.totalAmount | number_format(2, '.', ',') }} €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <form action="{{ path('app_payment_validate') }}" method="POST">
+                <button type="submit" class="btn btn-success btn-lg">Procéder au paiement</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

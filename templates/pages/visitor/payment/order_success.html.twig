@@ -1,0 +1,21 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Paiement réussi{% endblock %}
+
+{% block description %}Votre paiement a été effectué avec succès{% endblock %}
+
+{% block keywords %}ElectroTech, Paiement{% endblock %}
+
+{% block main %}
+<div class="container my-5">
+    <h1 class="text-center my-3 display-5">Paiement réussi !</h1>
+
+    <div class="alert alert-success text-center" role="alert">
+        Félicitations ! Votre paiement a été effectué avec succès. Vous recevrez un email de confirmation sous peu.
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ path('visitor_welcome_index') }}" class="btn btn-primary btn-lg">Retour à l'accueil</a>
+    </div>
+</div>
+{% endblock %}
