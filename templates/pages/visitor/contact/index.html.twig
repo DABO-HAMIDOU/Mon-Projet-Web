@@ -1,13 +1,54 @@
 {% extends "themes/base_visitor.html.twig" %}
 
-{% block title %}Contact {% endblock %}
-
+{% block title %}Contact{% endblock %}
 {% block description %}Notre contact via...{% endblock %}
-
 {% block keywords %}SyllaTechno, Contact{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">Nous contacter </h1>
+    <div class="container">
+        <h1 class="text-center my-3 display-5">Nous contacter</h1>
+          {% include 'components/_alert.html.twig' %}
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-12">
+                {# Affichage du formulaire de contact #}
+                {{ form_start(form) }}
+                    <div class="form-group mb-3">
+                        {{ form_label(form.firstName) }}
+                        <div class="text-danger">{{form_errors(form.firstName)}}</div>
+                        {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
 
-  
+                    <div class="form-group mb-3">
+                        {{ form_label(form.lastName) }}
+                        <div class="text-danger">{{form_errors(form.lastName)}}</div>
+                        {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.email) }}
+                        <div class="text-danger">{{form_errors(form.email)}}</div>
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {{ form_label(form.phone) }}
+                        <div class="text-danger">{{form_errors(form.phone)}}</div>
+                        {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                     <div class="form-group mb-3">
+                        {{ form_label(form.message) }}
+                        <div class="text-danger">{{form_errors(form.message)}}</div>
+                        {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group mt-3 mb-5">
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary', 'formnovalidate': 'formnovalidate', 'style': 'width: 50%;'}})}}
+                    </div>
+
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
