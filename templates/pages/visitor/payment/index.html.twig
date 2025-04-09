@@ -4,11 +4,11 @@
 
 {% block description %}Paiement{% endblock %}
 
-{% block keywords %}ElectroTech, Paiement{% endblock %}
+{% block keywords %}Sylla-techno, Paiement{% endblock %}
 
 {% block main %}
     <div class="container my-5">
-        <h1 class="text-center my-3 display-5">Paiement de votre commande</h1>
+        <h1 class="text-center my-3 display-5"> Récapitulatif de votre commande</h1>
 
         <div class="alert alert-info text-center" role="alert">
             Veuillez vérifier les informations de votre commande avant de procéder au paiement.
@@ -59,7 +59,7 @@
 
         <div class="text-center mt-4">
             <form action="{{ path('app_payment_validate') }}" method="POST">
-                <button type="submit" class="btn btn-success btn-lg">Procéder au paiement</button>
+                <button type="submit" class="btn btn-primary btn-lg">Procéder au paiement</button>
             </form>
         </div>
     </div>
