@@ -1,13 +1,122 @@
 {% extends "themes/base_visitor.html.twig" %}
 
-{% block title %}A propos {% endblock %}
-
-{% block description %}Catlogue des produits: Curseur de riz, Machine à laver...{% endblock %}
-
-{% block keywords %}SyllaTechno, A propos{% endblock %}
+{% block title %}À propos - SyllaTechno{% endblock %}
+{% block description %}Découvrez qui nous sommes, notre politique commerciale et notre engagement pour votre vie privée chez SyllaTechno.{% endblock %}
+{% block keywords %}SyllaTechno, À propos, e-commerce, produits informatiques{% endblock %}
 
 {% block main %}
-    <h1 class="text-center my-3 display-5">A propos de SyllaTechno </h1>
+<div class="container py-5">
+    <h1 class="text-center mb-5 display-5">À propos de <span class="text-primary">SyllaTechno</span></h1>
 
-  
+    <!-- Section Mission -->
+    <section class="reveal">
+        <h2 class="h4 text-uppercase text-secondary">Notre mission</h2>
+        <p>
+            Chez <strong>SyllaTechno</strong>, nous nous engageons à offrir les meilleurs produits informatiques 
+            à des prix compétitifs. Notre mission est de rendre la technologie accessible à tous en 
+            fournissant une large gamme de produits : ordinateurs, composants, accessoires, périphériques et plus encore.
+        </p>
+    </section>
+
+    <hr>
+
+    <!-- Section Politique commerciale -->
+    <section class="reveal">
+        <h2 class="h4 text-uppercase text-secondary">Politique commerciale</h2>
+        <p>
+            Nous croyons en une politique commerciale transparente. Nos produits sont sélectionnés avec soin pour leur qualité 
+            et leur durabilité. SyllaTechno travaille directement avec les fabricants et grossistes pour garantir des tarifs 
+            compétitifs et des délais de livraison optimisés.
+        </p>
+        <p>
+            Notre service client est à votre écoute 6j/7 pour vous accompagner avant et après vos achats.
+        </p>
+    </section>
+
+    <hr>
+
+    <!-- Section Respect de la vie privée -->
+    <section class="reveal">
+        <h2 class="h4 text-uppercase text-secondary">Respect de la vie privée</h2>
+        <p>
+            La confidentialité de vos données est une priorité absolue. Nous ne partageons jamais vos informations 
+            personnelles sans votre consentement explicite. Toutes les transactions sont sécurisées et les données 
+            sont stockées conformément aux normes RGPD.
+        </p>
+    </section>
+
+    <hr>
+
+    <!-- Section Pourquoi nous choisir ? -->
+    <section class="reveal">
+        <h2 class="h4 text-uppercase text-secondary">Pourquoi nous choisir ?</h2>
+        <ul>
+            <li>Un large catalogue de produits informatiques</li>
+            <li>Des prix attractifs toute l’année</li>
+            <li>Un service client réactif</li>
+            <li>Une livraison rapide et sécurisée</li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <!-- Section Carrousel des Partenaires -->
+    <section class="mt-5">
+        <h2 class="text-center mb-4 text-primary">Nos Partenaires</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="{{ asset('images/ldlc.png') }}" alt="LDLC" class="img-fluid"></div>
+                <div class="swiper-slide"><img src="{{ asset('images/dakar.jpg') }}" alt="Dakar Informatique" class="img-fluid"></div>
+                <div class="swiper-slide"><img src="{{ asset('images/boulange.png') }}" alt="Boulanger" class="img-fluid"></div>
+                <div class="swiper-slide"><img src="{{ asset('images/topachat.png') }}" alt="Top Achat" class="img-fluid"></div>
+                <div class="swiper-slide"><img src="{{ asset('images/senotech.png') }}" alt="Senotech" class="img-fluid"></div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<!-- Inclure Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+// Animation des sections au scroll
+document.addEventListener("DOMContentLoaded", function () {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("animate__fadeInUp", "animate__animated");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(section => observer.observe(section));
+});
+
+// Initialisation Swiper (Carrousel Partenaires)
+const swiper = new Swiper(".mySwiper", {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 0, // Aucun délai pour un défilement continu
+        disableOnInteraction: false, // Pas de pause après interaction
+    },
+    breakpoints: {
+        320: { slidesPerView: 1 },
+        576: { slidesPerView: 2 },
+        768: { slidesPerView: 3 },
+        992: { slidesPerView: 4 },
+    }
+});
+</script>
+
 {% endblock %}
