@@ -27,7 +27,7 @@ class CarrierController extends AbstractController
         return $this->render('pages/admin/carrier/index.html.twig', compact('carriers'));
     }
 
-
+// route
     #[Route('/carrier/create', name: 'admin_carrier_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
